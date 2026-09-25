@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EasyH5 Engine · 图形化 2D / 3D 游戏引擎</title>
+<link rel="stylesheet" href="src/engine.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== 顶部工具栏 ===================== -->
+  <header id="toolbar">
+    <div class="brand">
+      <span class="logo">💡</span>
+      <span>EasyH5 <small>Engine</small></span>
+    </div>
+
+    <div class="tb-group">
+      <button class="btn" id="btn-new"><span class="ico">✨</span>新建</button>
+      <button class="btn" id="btn-open"><span class="ico">📂</span>打开</button>
+      <button class="btn" id="btn-save"><span class="ico">💾</span>保存</button>
+      <button class="btn" id="btn-export"><span class="ico">📦</span>导出</button>
+    </div>
+
+    <div class="tb-sep"></div>
+
+    <div class="tb-group">
+      <button class="btn run" id="btn-run"><span class="ico">▶</span>运行</button>
+      <button class="btn" id="btn-pause" title="暂停 / 继续（不影响运行模式）"><span class="ico">⏸</span></button>
+      <button class="btn stop" id="btn-stop"><span class="ico">■</span>停止</button>
+    </div>
+
+    <div class="tb-sep"></div>
+
+    <div class="tb-group">
+      <div class="seg" id="mode-seg">
+        <button data-mode="2d" class="on">2D</button>
+        <button data-mode="3d">3D</button>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <input class="proj-name" id="proj-name" value="我的作品" title="项目名称" maxlength="40">
+    <button class="btn ghost" id="btn-help" title="快捷键与说明"><span class="ico">❔</span></button>
+  </header>
+
+  <!-- ===================== 主体 ===================== -->
+  <div id="main">
+
+    <!-- 左：积木调色板 -->
+    <aside id="palette">
+      <div id="cat-rail"></div>
+      <div id="palette-main">
+        <div id="palette-search">
+          <span class="mag">🔍</span>
+          <input id="block-search" type="text" placeholder="搜索积木…" autocomplete="off" spellcheck="false">
+          <button id="block-search-clear" title="清除搜索">×</button>
+        </div>
+        <div id="block-list"></div>
+      </div>
+    </aside>
+
+    <!-- 中：积木工作区 -->
+    <section id="center">
+      <div id="target-bar"></div>
+      <div id="workspace">
+        <div id="ws-inner">
+          <div id="ws-scripts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右：舞台 + 属性 -->
+    <aside id="right">
+      <div id="stage-wrap">
+        <div id="stage-frame">
+          <div id="stage-host"></div>
+          <div id="stage-badge">2D</div>
+          <div id="stage-overlay">
+            <button class="sbtn flag" id="sbtn-flag" title="运行（绿旗）">▶</button>
+            <button class="sbtn pause" id="sbtn-pause" title="暂停 / 继续">⏸</button>
+            <button class="sbtn stop" id="sbtn-stop" title="停止">■</button>
+            <button class="sbtn tiny" id="sbtn-full" title="全屏运行">⛶</button>
+          </div>
+        </div>
+        <div id="stage-foot">
+          <span id="fps-pill">-- FPS</span>
+          <span id="stage-info">480 × 360</span>
+          <span class="spacer"></span>
+          <span id="run-state">就绪</span>
+        </div>
+      </div>
+      <div id="inspector"></div>
+    </aside>
+
+  </div>
+
+  <!-- ===================== 状态栏 ===================== -->
+  <footer id="statusbar">
+    <span class="st">角色 <b id="st-sprites">1</b></span>
+    <span class="st">积木 <b id="st-blocks">0</b></span>
+    <span class="st">变量 <b id="st-vars">0</b></span>
+    <span class="st">素材 <b id="st-assets">0</b></span>
+    <span class="st" id="st-mode">模式 <b>2D</b></span>
+    <span class="st" id="st-pad">手柄 <b>未连接</b></span>
+    <span class="spacer" style="flex:1"></span>
+    <span id="toast"></span>
+    <span class="st" id="st-msg">就绪</span>
+  </footer>
+
+</div>
+
+<!-- ===================== 全屏运行模式 ===================== -->
+<div id="runmode">
+  <div id="run-top">
+    <span style="font-size:15px">▶</span>
+    <span id="run-title">运行中</span>
+    <span class="spacer"></span>
+    <span id="run-pad" style="color:#7c8798"></span>
+    <span id="run-fps" style="font-family:ui-monospace,Consolas,monospace;color:#7c8798">-- FPS</span>
+    <button class="btn" id="run-restart"><span class="ico">↻</span>重新开始</button>
+    <button class="btn" id="run-close"><span class="ico">✕</span>退出运行</button>
+  </div>
+  <div id="run-stage"><div id="run-stage-inner"></div></div>
+</div>
+
+<div id="trash-hint"></div>
+<div id="ctx-hint"></div>
+<datalist id="eh5-objs"></datalist>
+<input type="file" id="file-input" accept=".json,.eh5,application/json" style="display:none">
+
+<script src="vendor/three.min.js"></script>
+<script src="src/blocks.js"></script>
+<script src="src/model.js"></script>
+<script src="src/samples.js"></script>
+<script src="src/render2d.js"></script>
+<script src="src/render3d.js"></script>
+<script src="src/models.js"></script>
+<script src="src/runtime.js"></script>
+<script src="src/workspace.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>

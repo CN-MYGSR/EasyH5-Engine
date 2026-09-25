@@ -1,0 +1,19 @@
+# ---- 构建产物（可由 node _tools/build.js 重新生成）----
+dist/
+EasyH5Engine.html
+
+# ---- 测试与开发临时文件 ----
+_tools/shots/
+_tools/out/
+_tools/meta/
+_tools/*.log
+_tools/.chrome-*
+
+# ---- 代理工作目录 ----
+.workbuddy-ai/
+
+# ---- 通用 ----
+node_modules/
+.DS_Store
+Thumbs.db
+*.swp
