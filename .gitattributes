@@ -8,6 +8,9 @@
 *.yml   text eol=lf
 *.yaml  text eol=lf
 
+# 构建产物：由 node _tools/build.js 生成，让 GitHub 折叠它的 diff、不计入语言统计
+EasyH5Engine.html linguist-generated=true -diff
+
 # 二进制文件不做换行转换
 *.png   binary
 *.jpg   binary

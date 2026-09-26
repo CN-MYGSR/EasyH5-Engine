@@ -1,6 +1,7 @@
-# ---- 构建产物（可由 node _tools/build.js 重新生成）----
+# ---- 部署目录（发布到 VibeHub 时由 EasyH5Engine.html 生成）----
+# 注意：EasyH5Engine.html 本身要入库 —— 它是「双击即用」的成品，
+# 没有它的话别人克隆下来还得先装 Node 才能拿到可运行的东西。
 dist/
-EasyH5Engine.html
 
 # ---- 测试与开发临时文件 ----
 _tools/shots/
